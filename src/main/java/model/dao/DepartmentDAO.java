@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.dto.Department;
@@ -23,11 +24,11 @@ public class DepartmentDAO {
 	private Connection connection;
 
 	/**
-	* コンストラクタ<br>
-	* 引数で渡されるコネクションをフィールドに設定する
-	*
-	* @param connection コネクション
-	*/
+	 * コンストラクタ<br>
+	 * 引数で渡されるコネクションをフィールドに設定する
+	 *
+	 * @param connection コネクション
+	 */
 	public DepartmentDAO(Connection connection) {
 		this.connection = connection;
 	}
@@ -43,11 +44,11 @@ public class DepartmentDAO {
 	/**
 	 * １件検索（条件：部門名）SQL
 	 */
-	private static final String SELECT_ONE_BY_NAME_SQL = "SELECT dept_id, dept_name FROM department WHERE dept_name = ";
+	private static final String SELECT_ONE_BY_NAME_SQL = "SELECT dept_id, dept_name FROM department WHERE dept_name = ?";// 直した
 	/**
 	 * 登録SQL
 	 */
-	private static final String INSERT_SQL = "INSERT INTO department(nextval('seq_deptno'), ?)";
+	private static final String INSERT_SQL = "INSERT INTO department (dept_id, dept_name) VALUES (nextval('seq_deptno'), ?)";// 直した
 	/**
 	 * 更新SQL
 	 */
@@ -65,7 +66,7 @@ public class DepartmentDAO {
 	 * @throws SQLException 情報の取得に失敗
 	 */
 	public List<Department> selectAll() throws SQLException {
-		List<Department> deptList=null;
+		List<Department> deptList = new ArrayList<>();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_SQL);) {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -110,7 +111,7 @@ public class DepartmentDAO {
 	 */
 	public Department selectByDeptName(String deptName) throws SQLException {
 		Department department = null;
-		try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_BY_NAME_SQL+"'"+deptName+"'");) {
+		try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_BY_NAME_SQL);) {
 			preparedStatement.setString(1, deptName);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
