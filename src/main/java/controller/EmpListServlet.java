@@ -27,6 +27,8 @@ public class EmpListServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// セッションを作成しておく
+		req.getSession(true);
 		try {
 			req.setAttribute("empAllList", new GetEmployeeListService().readEmployeeAllWithDeptName());
 		} catch (ServiceException e) {
