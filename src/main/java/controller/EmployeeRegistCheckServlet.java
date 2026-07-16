@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import model.dto.Department;
 import model.dto.Employee;
+import model.service.InsertEmployeeService;
 
 /**
  * P005【社員登録確認画面】用 コントローラー<br>
@@ -53,6 +54,14 @@ public class EmployeeRegistCheckServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(true);
 		Employee employee = getInputParameterEmployee(req);
+
+		// 変更
+		try {
+			new InsertEmployeeService().createEmployee(employee);
+		} catch (Exception e) {
+			resp.sendRedirect("error");
+			return;
+		}
 
 		session.setAttribute("newEmpComplete", employee);
 		resp.sendRedirect("empregistcomp");
