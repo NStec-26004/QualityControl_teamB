@@ -104,15 +104,7 @@ public class EmployeeRegistInputServlet extends HttpServlet {
 	private Employee getInputParameterEmployee(HttpServletRequest req) {
 		String name = req.getParameter("name");
 		// 直した
-		int deptId = 0;
-		String deptParam = req.getParameter("deptId");
-		if (deptParam != null && !deptParam.isEmpty()) {
-			try {
-				deptId = Integer.parseInt(deptParam);
-			} catch (NumberFormatException e) {
-				deptId = 0;
-			}
-		}
+		int deptId = Integer.parseInt(req.getParameter("deptId"));
 		String phone = req.getParameter("phone");
 		String mailAddress = req.getParameter("mailAddress");
 		Employee employee = new Employee();

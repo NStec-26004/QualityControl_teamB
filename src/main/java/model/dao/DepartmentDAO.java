@@ -44,11 +44,13 @@ public class DepartmentDAO {
 	/**
 	 * １件検索（条件：部門名）SQL
 	 */
-	private static final String SELECT_ONE_BY_NAME_SQL = "SELECT dept_id, dept_name FROM department WHERE dept_name = ?";// 直した
+	// private static final String SELECT_ONE_BY_NAME_SQL = "SELECT dept_id,
+	// dept_name FROM department WHERE dept_name = ?";// 直した
 	/**
 	 * 登録SQL
 	 */
-	private static final String INSERT_SQL = "INSERT INTO department (dept_id, dept_name) VALUES (nextval('seq_deptno'), ?)";// 直した
+	// private static final String INSERT_SQL = "INSERT INTO department (dept_id,
+	// dept_name) VALUES (nextval('seq_deptno'), ?)";// 直した
 	/**
 	 * 更新SQL
 	 */
